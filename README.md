@@ -1,4 +1,4 @@
-# 🏍️ Helmet Shop - Cửa Hàng Mũ Bảo Hiểm
+# 🏍️ Bi Helmet - Cửa Hàng Mũ Bảo Hiểm
 
 ## ✨ Tính năng chính
 

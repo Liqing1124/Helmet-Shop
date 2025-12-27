@@ -36,7 +36,7 @@ const CheckoutPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white dark:bg-black transition-colors">
+        <div className="min-h-screen bg-white transition-colors">
             <Navigation />
 
             {/* Cart Summary in Top Left Corner */}

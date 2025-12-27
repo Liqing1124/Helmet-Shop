@@ -26,7 +26,7 @@ export function Footer() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         viewport={{ once: true }}
                     >
-                        <h3 className="text-lg font-semibold mb-4">Helmet Store</h3>
+                        <h3 className="text-lg font-semibold mb-4">Bi Helmet</h3>
                         <p className="text-gray-400">Cung cấp mũ bảo hiểm chất lượng cao cho mọi nhu cầu.</p>
                     </motion.div>
                     <motion.div
@@ -85,7 +85,7 @@ export function Footer() {
                     className="border-t border-gray-700 mt-8 pt-8 text-center"
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-gray-400">&copy; 2025 Helmet Store. Tất cả quyền được bảo lưu.</p>
+                        <p className="text-gray-400">&copy; 2025 Bi Helmet. Tất cả quyền được bảo lưu.</p>
                         <div className="mt-4 md:mt-0">
                             <input type="email" placeholder="Đăng ký nhận bản tin" className="px-4 py-2 rounded-l-lg text-black" />
                             <motion.button

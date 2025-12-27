@@ -50,7 +50,7 @@ export default function About() {
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">Về Chúng Tôi</h1>
                     <p className="text-lg md:text-xl max-w-2xl mx-auto">
-                        Helmet Store - Nơi an toàn bắt đầu. Chúng tôi chuyên cung cấp các loại mũ bảo hiểm
+                        Bi Helmet - Nơi an toàn bắt đầu. Chúng tôi chuyên cung cấp các loại mũ bảo hiểm
                         chất lượng cao với dịch vụ tận tâm, mang đến sự bảo vệ tối đa cho quý khách hàng.
                     </p>
                 </div>
@@ -69,7 +69,7 @@ export default function About() {
                         <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Câu Chuyện Của Chúng Tôi</h2>
                         <div className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed space-y-6">
                             <p>
-                                Thành lập từ năm 2014, Helmet Store bắt đầu với sứ mệnh đơn giản nhưng đầy ý nghĩa:
+                                Thành lập từ năm 2014, Bi Helmet bắt đầu với sứ mệnh đơn giản nhưng đầy ý nghĩa:
                                 mang đến sự an toàn cho mọi người trên đường phố Việt Nam.
                             </p>
                             <p>
@@ -80,7 +80,7 @@ export default function About() {
                             <p>
                                 Không chỉ bán sản phẩm, chúng tôi còn mang đến dịch vụ tư vấn chuyên nghiệp,
                                 hỗ trợ kỹ thuật tận tình và cam kết bảo hành dài hạn. Mỗi chiếc mũ bảo hiểm từ
-                                Helmet Store đều là lời hứa về sự an toàn và chất lượng.
+                                Bi Helmet đều là lời hứa về sự an toàn và chất lượng.
                             </p>
                         </div>
                     </motion.div>
@@ -180,7 +180,7 @@ export default function About() {
                                 tốt đẹp hơn cho cộng đồng."
                             </p>
                             <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
-                                - Đội ngũ Helmet Store
+                                - Đội ngũ Bi Helmet
                             </p>
                         </div>
                     </motion.div>

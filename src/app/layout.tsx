@@ -17,7 +17,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cửa Hàng Mũ Bảo Hiểm",
   description: "Khám phá bộ sưu tập mũ bảo hiểm chất lượng cao. An toàn, phong cách và giá cả phải chăng.",
-  charset: "utf-8",
 };
 
 export default function RootLayout({

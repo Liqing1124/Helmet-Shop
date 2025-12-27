@@ -35,19 +35,7 @@ function ProductsSection() {
         setSelectedProduct(null);
     };
 
-    const handleAddToCart = (product: typeof bestSellers[0]) => {
-        dispatch({
-            type: 'ADD_ITEM',
-            payload: {
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                size: product.sizes[0], // Default to first size
-            },
-        });
-        dispatch({ type: 'SHOW_TOAST', payload: 'Đã thêm vào giỏ hàng!' });
-    };
+
 
     return (
         <motion.section
@@ -88,21 +76,11 @@ function ProductsSection() {
                                         <Star
                                             key={i}
                                             className={`w-5 h-5 ${i < product.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+
                                         />
                                     ))}
                                 </div>
-                                <motion.button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        handleAddToCart(product);
-                                    }}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                                >
-                                    Thêm vào giỏ
-                                </motion.button>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Nhấn vào hình để xem thêm chi tiết</p>
                             </motion.div>
                         ))}
                     </div>

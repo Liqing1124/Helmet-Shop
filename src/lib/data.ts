@@ -99,7 +99,7 @@ export const navItems = [
     { name: 'Trang chủ', href: '/' },
     { name: 'Sản phẩm', href: '/products' },
     { name: 'Thanh toán', href: '/checkout' },
-    { name: 'Liên hệ', href: '/contact' }
+    { name: 'Về chúng tôi', href: '/about' }
 ];
 
 export const socialLinks = [

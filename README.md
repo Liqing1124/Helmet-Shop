@@ -10,10 +10,9 @@
 - **📞 Liên hệ**: Form liên hệ hoàn chỉnh với thông tin cửa hàng
 
 ### 🎨 Giao diện & Trải nghiệm
-- **🌙 Dark Mode**: Chế độ tối/sáng với chuyển đổi mượt mà
 - **📱 Responsive**: Tương thích hoàn hảo trên mọi thiết bị
 - **🎭 Animations**: Hiệu ứng mượt mà với Framer Motion
-- **🇻🇳 Tiếng Việt**: Giao diện hoàn toàn bằng tiếng Việt
+- **🇳 Tiếng Việt**: Giao diện hoàn toàn bằng tiếng Việt
 
 ### 🛠️ Chức năng kỹ thuật
 - **⚡ Performance**: Tối ưu với Next.js App Router
@@ -23,10 +22,10 @@
 
 ## 🚀 Công nghệ sử dụng
 
-- **Frontend**: Next.js 16, React 19, TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
+- **Frontend**: Next.js 16.1.1, React 19.2.3, TypeScript 5
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion 12.23.26
+- **Icons**: Lucide React 0.562.0
 - **State Management**: React Context
 - **Deployment**: Vercel/Netlify
 

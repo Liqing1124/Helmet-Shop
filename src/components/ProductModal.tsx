@@ -1,8 +1,8 @@
 'use client';
 
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, X } from 'lucide-react';
-import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 
 interface Product {
@@ -23,6 +23,7 @@ interface ProductModalProps {
 
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
     const [selectedSize, setSelectedSize] = useState<string>('');
+    const [quantity, setQuantity] = useState<number>(1);
     const { dispatch } = useCart();
 
     // Size ranges mapping
@@ -33,6 +34,12 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
         'XL': '61 - 62 cm',
         'XXL': '63 - 64 cm'
     };
+
+    // Reset quantity when product changes
+    React.useEffect(() => {
+        setQuantity(1);
+        setSelectedSize('');
+    }, [product]);
 
     if (!product) return null;
 
@@ -46,6 +53,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     price: product.price,
                     image: product.image,
                     size: selectedSize,
+                    quantity: quantity,
                 },
             });
             dispatch({ type: 'SHOW_TOAST', payload: 'Đã thêm vào giỏ hàng!' });
@@ -104,14 +112,44 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                                                 key={size}
                                                 onClick={() => setSelectedSize(size)}
                                                 className={`p-3 border rounded-lg text-center transition-colors ${selectedSize === size
-                                                        ? 'border-blue-500 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
-                                                        : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+                                                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
+                                                    : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
                                                     }`}
                                             >
                                                 <div className="text-sm text-gray-600 dark:text-gray-400">{sizeRanges[size]}</div>
                                                 <div className="font-semibold text-black dark:text-white">{size}</div>
                                             </button>
                                         ))}
+                                    </div>
+                                </div>
+                                <div className="mb-6">
+                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Số Lượng</label>
+                                    <div className="flex items-center space-x-3">
+                                        <button
+                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                            className="w-10 h-10 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50"
+                                            disabled={quantity <= 1}
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={quantity}
+                                            onChange={(e) => {
+                                                const value = parseInt(e.target.value);
+                                                if (!isNaN(value) && value >= 1) {
+                                                    setQuantity(value);
+                                                }
+                                            }}
+                                            className="w-20 h-10 text-center border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                                        />
+                                        <button
+                                            onClick={() => setQuantity(quantity + 1)}
+                                            className="w-10 h-10 rounded-lg border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-700"
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                 </div>
                                 <button

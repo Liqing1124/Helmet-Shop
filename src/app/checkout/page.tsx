@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigation } from '../../components/Navigation';
 import { Footer } from '../../components/Footer';
 import { ArrowLeft, ShoppingCart } from 'lucide-react';
@@ -9,12 +9,17 @@ import { useCart } from '../../contexts/CartContext';
 
 const CheckoutPage = () => {
     const { state, totalItems, totalPrice } = useCart();
+    const [isMounted, setIsMounted] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         address: '',
         paymentMethod: 'cod'
     });
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -35,45 +40,47 @@ const CheckoutPage = () => {
             <Navigation />
 
             {/* Cart Summary in Top Left Corner */}
-            <div className="fixed top-20 left-4 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 max-w-sm max-h-96 overflow-y-auto z-40 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center mb-3">
-                    <ShoppingCart className="w-5 h-5 mr-2 text-gray-600 dark:text-gray-400" />
-                    <h3 className="text-lg font-semibold text-black dark:text-white">
-                        Giỏ hàng ({totalItems})
-                    </h3>
-                </div>
+            {isMounted && (
+                <div className="fixed top-20 left-4 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 max-w-md max-h-96 overflow-y-auto z-40 border border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center mb-4">
+                        <ShoppingCart className="w-6 h-6 mr-3 text-gray-600 dark:text-gray-400" />
+                        <h3 className="text-xl font-bold text-black dark:text-white" suppressHydrationWarning>
+                            Giỏ hàng ({totalItems})
+                        </h3>
+                    </div>
 
-                {state.items.length === 0 ? (
-                    <p className="text-gray-500 dark:text-gray-400 text-center py-4">Giỏ hàng trống</p>
-                ) : (
-                    <div className="space-y-3">
-                        {state.items.map((item) => (
-                            <div key={`${item.id}-${item.size}`} className="flex items-center space-x-3 border-b border-gray-200 dark:border-gray-700 pb-3">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-12 h-12 object-cover rounded"
-                                />
-                                <div className="flex-1 min-w-0">
-                                    <h4 className="font-medium text-black dark:text-white text-sm truncate">{item.name}</h4>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">Kích thước: {item.size}</p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">Số lượng: {item.quantity}</p>
-                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{item.price}</p>
+                    {state.items.length === 0 ? (
+                        <p className="text-gray-500 dark:text-gray-400 text-center py-4 text-lg">Giỏ hàng trống</p>
+                    ) : (
+                        <div className="space-y-4">
+                            {state.items.map((item) => (
+                                <div key={`${item.id}-${item.size}`} className="flex items-center space-x-4 border-b border-gray-200 dark:border-gray-700 pb-4">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-16 h-16 object-cover rounded"
+                                    />
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className="font-semibold text-black dark:text-white text-base truncate">{item.name}</h4>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Kích thước: {item.size}</p>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Số lượng: {item.quantity}</p>
+                                        <p className="text-base font-semibold text-gray-700 dark:text-gray-300">{item.price}</p>
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                                <div className="flex justify-between items-center">
+                                    <span className="font-bold text-black dark:text-white text-lg">Tổng cộng:</span>
+                                    <span className="font-bold text-black dark:text-white text-lg" suppressHydrationWarning>
+                                        {totalPrice.toLocaleString()} VNĐ
+                                    </span>
                                 </div>
                             </div>
-                        ))}
-
-                        <div className="border-t border-gray-200 dark:border-gray-700 pt-3">
-                            <div className="flex justify-between items-center">
-                                <span className="font-semibold text-black dark:text-white">Tổng cộng:</span>
-                                <span className="font-semibold text-black dark:text-white">
-                                    {totalPrice.toLocaleString()} VNĐ
-                                </span>
-                            </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            )}
 
             <div className="container mx-auto px-4 py-8 max-w-2xl">
                 <div className="mb-6">

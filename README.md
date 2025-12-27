@@ -1,8 +1,5 @@
 # 🏍️ Helmet Shop - Cửa Hàng Mũ Bảo Hiểm
 
-Một website thương mại điện tử hiện đại dành cho cửa hàng mũ bảo hiểm, được xây dựng bằng Next.js với thiết kế responsive và trải nghiệm người dùng tối ưu.
-
-
 ## ✨ Tính năng chính
 
 ### 🎯 Tính năng cốt lõi
@@ -97,48 +94,3 @@ helmet-shop/
 ├── next.config.ts
 └── README.md
 ```
-
-## 🎯 Screenshots
-
-### Trang chủ
-![Home Page](https://via.placeholder.com/600x300?text=Home+Page)
-
-### Trang liên hệ
-![Contact Page](https://via.placeholder.com/600x300?text=Contact+Page)
-
-### Giỏ hàng
-![Cart](https://via.placeholder.com/600x300?text=Cart)
-
-## 📧 Thông tin liên hệ
-
-- **Email**: info@helmetstore.vn
-- **Điện thoại**: +84 123 456 789
-- **Địa chỉ**: 123 Đường ABC, Quận 1, TP.HCM
-- **Giờ làm việc**: 8:00 - 18:00 (Thứ 2 - Chủ nhật)
-
-## 🤝 Đóng góp
-
-Chúng tôi hoan nghênh mọi đóng góp! Vui lòng:
-
-1. Fork repository
-2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Mở Pull Request
-
-## 📄 License
-
-Dự án này được phân phối dưới giấy phép MIT. Xem file `LICENSE` để biết thêm chi tiết.
-
-## 🙏 Lời cảm ơn
-
-- [Next.js](https://nextjs.org/) - React framework
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
-- [Lucide](https://lucide.dev/) - Icon library
-
----
-
-**🚀 Phát triển bởi**: Helmet Shop Team
-
-**📅 Cập nhật lần cuối**: Tháng 12, 2025

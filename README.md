@@ -2,7 +2,6 @@
 
 Một website thương mại điện tử hiện đại dành cho cửa hàng mũ bảo hiểm, được xây dựng bằng Next.js với thiết kế responsive và trải nghiệm người dùng tối ưu.
 
-![Helmet Shop Preview](https://via.placeholder.com/800x400?text=Helmet+Shop+Preview)
 
 ## ✨ Tính năng chính
 

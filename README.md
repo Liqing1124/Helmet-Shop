@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏍️ Helmet Shop - Cửa Hàng Mũ Bảo Hiểm
 
-## Getting Started
+Một website thương mại điện tử hiện đại dành cho cửa hàng mũ bảo hiểm, được xây dựng bằng Next.js với thiết kế responsive và trải nghiệm người dùng tối ưu.
 
-First, run the development server:
+![Helmet Shop Preview](https://via.placeholder.com/800x400?text=Helmet+Shop+Preview)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Tính năng chính
+
+### 🎯 Tính năng cốt lõi
+- **🏠 Trang chủ**: Hero section, danh mục sản phẩm nổi bật, sản phẩm bán chạy
+- **🛍️ Sản phẩm**: Danh sách sản phẩm với bộ lọc và tìm kiếm
+- **🛒 Giỏ hàng**: Quản lý giỏ hàng với React Context
+- **💳 Thanh toán**: Trang thanh toán với form đơn giản
+- **📞 Liên hệ**: Form liên hệ hoàn chỉnh với thông tin cửa hàng
+
+### 🎨 Giao diện & Trải nghiệm
+- **🌙 Dark Mode**: Chế độ tối/sáng với chuyển đổi mượt mà
+- **📱 Responsive**: Tương thích hoàn hảo trên mọi thiết bị
+- **🎭 Animations**: Hiệu ứng mượt mà với Framer Motion
+- **🇻🇳 Tiếng Việt**: Giao diện hoàn toàn bằng tiếng Việt
+
+### 🛠️ Chức năng kỹ thuật
+- **⚡ Performance**: Tối ưu với Next.js App Router
+- **🔍 SEO**: Cấu hình SEO cơ bản
+- **📧 Form Validation**: Validation form với HTML5 và JavaScript
+- **💾 Local Storage**: Lưu trữ dữ liệu giỏ hàng
+
+## 🚀 Công nghệ sử dụng
+
+- **Frontend**: Next.js 16, React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **State Management**: React Context
+- **Deployment**: Vercel/Netlify
+
+## 📦 Cài đặt và chạy
+
+### Yêu cầu hệ thống
+- Node.js 18.0 hoặc cao hơn
+- npm hoặc yarn hoặc pnpm
+
+### Các bước cài đặt
+
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/Liqing1124/Helmet-Shop.git
+   cd Helmet-Shop
+   ```
+
+2. **Cài đặt dependencies**
+   ```bash
+   npm install
+   # hoặc
+   yarn install
+   # hoặc
+   pnpm install
+   ```
+
+3. **Chạy development server**
+   ```bash
+   npm run dev
+   # hoặc
+   yarn dev
+   # hoặc
+   pnpm dev
+   ```
+
+4. **Mở trình duyệt**
+   ```
+   http://localhost:3000
+   ```
+
+## 📁 Cấu trúc dự án
+
+```
+helmet-shop/
+├── public/                 # Static assets
+├── src/
+│   ├── app/               # Next.js App Router
+│   │   ├── contact/       # Trang liên hệ
+│   │   ├── products/      # Trang sản phẩm
+│   │   ├── checkout/      # Trang thanh toán
+│   │   ├── layout.tsx     # Root layout
+│   │   └── page.tsx       # Trang chủ
+│   ├── components/        # React components
+│   │   ├── Navigation.tsx # Menu điều hướng
+│   │   ├── Hero.tsx       # Hero section
+│   │   ├── Footer.tsx     # Footer
+│   │   ├── CartDrawer.tsx # Giỏ hàng
+│   │   └── ...
+│   ├── contexts/          # React contexts
+│   │   └── CartContext.tsx
+│   └── lib/               # Utilities & data
+│       └── data.ts        # Static data
+├── package.json
+├── tailwind.config.js
+├── next.config.ts
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Screenshots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Trang chủ
+![Home Page](https://via.placeholder.com/600x300?text=Home+Page)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Trang liên hệ
+![Contact Page](https://via.placeholder.com/600x300?text=Contact+Page)
 
-## Learn More
+### Giỏ hàng
+![Cart](https://via.placeholder.com/600x300?text=Cart)
 
-To learn more about Next.js, take a look at the following resources:
+## 📧 Thông tin liên hệ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Email**: info@helmetstore.vn
+- **Điện thoại**: +84 123 456 789
+- **Địa chỉ**: 123 Đường ABC, Quận 1, TP.HCM
+- **Giờ làm việc**: 8:00 - 18:00 (Thứ 2 - Chủ nhật)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Đóng góp
 
-## Deploy on Vercel
+Chúng tôi hoan nghênh mọi đóng góp! Vui lòng:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork repository
+2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Mở Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+Dự án này được phân phối dưới giấy phép MIT. Xem file `LICENSE` để biết thêm chi tiết.
+
+## 🙏 Lời cảm ơn
+
+- [Next.js](https://nextjs.org/) - React framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
+- [Lucide](https://lucide.dev/) - Icon library
+
+---
+
+**🚀 Phát triển bởi**: Helmet Shop Team
+
+**📅 Cập nhật lần cuối**: Tháng 12, 2025

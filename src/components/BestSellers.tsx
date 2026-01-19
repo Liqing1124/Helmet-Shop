@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
-import { bestSellers } from '../lib/data';
+import { getBestSellers, Product } from '../lib/data';
 import { useCart } from '../contexts/CartContext';
 import { useState, useEffect } from 'react';
 import ProductModal from './ProductModal';
@@ -10,20 +10,27 @@ import { ProductGridSkeleton } from './Skeleton';
 
 export function BestSellers() {
     const { dispatch } = useCart();
-    const [selectedProduct, setSelectedProduct] = useState<typeof bestSellers[0] | null>(null);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Simulate loading delay
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1500);
+        const fetchBestSellers = async () => {
+            try {
+                const data = await getBestSellers();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching best sellers:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-        return () => clearTimeout(timer);
+        fetchBestSellers();
     }, []);
 
-    const handleProductClick = (product: typeof bestSellers[0]) => {
+    const handleProductClick = (product: Product) => {
         setSelectedProduct(product);
         setIsModalOpen(true);
     };
@@ -32,8 +39,6 @@ export function BestSellers() {
         setIsModalOpen(false);
         setSelectedProduct(null);
     };
-
-
 
     return (
         <motion.section
@@ -57,7 +62,7 @@ export function BestSellers() {
                     <ProductGridSkeleton />
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {bestSellers.map((product, index) => (
+                        {products.map((product, index) => (
                             <motion.div
                                 key={product.id}
                                 initial={{ opacity: 0, y: 20 }}

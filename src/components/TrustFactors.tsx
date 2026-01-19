@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Truck, RotateCcw, Shield } from 'lucide-react';
-import { trustFactors } from '../lib/data';
+import { getTrustFactors, TrustFactor } from '../lib/data';
+import { useState, useEffect } from 'react';
 
 const iconMap = {
     'truck': Truck,
@@ -11,6 +12,21 @@ const iconMap = {
 };
 
 export function TrustFactors() {
+    const [trustFactors, setTrustFactors] = useState<TrustFactor[]>([]);
+
+    useEffect(() => {
+        const fetchTrustFactors = async () => {
+            try {
+                const data = await getTrustFactors();
+                setTrustFactors(data);
+            } catch (error) {
+                console.error('Error fetching trust factors:', error);
+            }
+        };
+
+        fetchTrustFactors();
+    }, []);
+
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}

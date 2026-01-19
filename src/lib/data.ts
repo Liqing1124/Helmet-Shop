@@ -1,3 +1,5 @@
+import { supabase } from './supabase';
+
 export interface Product {
     id: number;
     name: string;
@@ -6,6 +8,7 @@ export interface Product {
     image: string;
     description: string;
     sizes: string[];
+    category_id?: number;
 }
 
 export interface Category {
@@ -20,80 +23,200 @@ export interface TrustFactor {
     icon: string;
 }
 
-export const categories: Category[] = [
-    {
-        id: 1,
-        name: 'Mũ Fullface',
-        image: 'https://via.placeholder.com/300x200?text=Fullface'
-    },
-    {
-        id: 2,
-        name: 'Mũ 3/4',
-        image: 'https://via.placeholder.com/300x200?text=3/4+Helmet'
-    },
-    {
-        id: 3,
-        name: 'Mũ Xe Đạp',
-        image: 'https://via.placeholder.com/300x200?text=Bike+Helmet'
-    }
-];
+export interface Order {
+    id: number;
+    user_id?: string;
+    total_amount: number;
+    status: string;
+    customer_name: string;
+    customer_email: string;
+    customer_phone?: string;
+    shipping_address: string;
+    created_at: string;
+    order_items?: OrderItem[];
+}
 
-export const bestSellers: Product[] = [
-    {
-        id: 1,
-        name: 'Mũ Fullface Pro',
-        price: '1.200.000 VNĐ',
-        rating: 5,
-        image: 'https://via.placeholder.com/250x200?text=Mũ+Fullface+Pro',
-        description: 'Mũ bảo hiểm fullface chất lượng cao, bảo vệ tối đa cho người lái xe. Thiết kế aerodynamic, thoáng khí tốt.',
-        sizes: ['S', 'M', 'L', 'XL']
-    },
-    {
-        id: 2,
-        name: 'Mũ 3/4 Sport',
-        price: '800.000 VNĐ',
-        rating: 4,
-        image: 'https://via.placeholder.com/250x200?text=Mũ+3/4+Sport',
-        description: 'Mũ 3/4 thể thao, phù hợp cho các hoạt động ngoài trời. Chống va đập mạnh, nhẹ nhàng và thoải mái.',
-        sizes: ['M', 'L', 'XL']
-    },
-    {
-        id: 3,
-        name: 'Mũ Xe Đạp Urban',
-        price: '600.000 VNĐ',
-        rating: 5,
-        image: 'https://via.placeholder.com/250x200?text=Mũ+Xe+Đạp+Urban',
-        description: 'Mũ xe đạp dành cho đô thị, thiết kế hiện đại, tích hợp đèn LED và hệ thống thông gió hiệu quả.',
-        sizes: ['S', 'M', 'L']
-    },
-    {
-        id: 4,
-        name: 'Mũ Fullface Elite',
-        price: '1.500.000 VNĐ',
-        rating: 5,
-        image: 'https://via.placeholder.com/250x200?text=Mũ+Fullface+Elite',
-        description: 'Mũ fullface cao cấp với công nghệ tiên tiến, bảo vệ tối ưu và thiết kế sang trọng.',
-        sizes: ['S', 'M', 'L', 'XL', 'XXL']
-    }
-];
+export interface OrderItem {
+    id: number;
+    order_id: number;
+    product_id: number;
+    product_name: string;
+    product_price: string;
+    product_image: string;
+    size: string;
+    quantity: number;
+}
 
-export const trustFactors: TrustFactor[] = [
-    {
-        id: 1,
-        text: 'Giao hàng 2h',
-        icon: 'truck'
-    },
-    {
-        id: 2,
-        text: 'Đổi trả 30 ngày',
-        icon: 'refresh-cw'
-    },
-    {
-        id: 3,
-        text: 'Bảo hành 2 năm',
-        icon: 'shield'
+// Fetch categories from Supabase
+export async function getCategories(): Promise<Category[]> {
+    try {
+        const { data, error } = await supabase
+            .from('categories')
+            .select('*')
+            .order('id');
+
+        if (error) {
+            console.error('Error fetching categories:', error);
+            return [];
+        }
+
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        return [];
     }
-];
+}
+
+// Fetch products from Supabase
+export async function getProducts(): Promise<Product[]> {
+    try {
+        const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .order('id');
+
+        if (error) {
+            console.error('Error fetching products:', error);
+            return [];
+        }
+
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        return [];
+    }
+}
+
+// Fetch best sellers (products with rating >= 4)
+export async function getBestSellers(): Promise<Product[]> {
+    try {
+        const { data, error } = await supabase
+            .from('products')
+            .select('*')
+            .gte('rating', 4)
+            .order('rating', { ascending: false })
+            .limit(4);
+
+        if (error) {
+            console.error('Error fetching best sellers:', error);
+            return [];
+        }
+
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching best sellers:', error);
+        return [];
+    }
+}
+
+// Fetch trust factors from Supabase
+export async function getTrustFactors(): Promise<TrustFactor[]> {
+    try {
+        const { data, error } = await supabase
+            .from('trust_factors')
+            .select('*')
+            .order('id');
+
+        if (error) {
+            console.error('Error fetching trust factors:', error);
+            return [];
+        }
+
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching trust factors:', error);
+        return [];
+    }
+}
+
+// Create a new order
+export async function createOrder(orderData: {
+    user_id?: string;
+    total_amount: number;
+    customer_name: string;
+    customer_email: string;
+    customer_phone?: string;
+    shipping_address: string;
+    items: Array<{
+        product_id: number;
+        product_name: string;
+        product_price: string;
+        product_image: string;
+        size: string;
+        quantity: number;
+    }>;
+}): Promise<Order | null> {
+    try {
+        // Create the order
+        const { data: order, error: orderError } = await supabase
+            .from('orders')
+            .insert({
+                user_id: orderData.user_id,
+                total_amount: orderData.total_amount,
+                customer_name: orderData.customer_name,
+                customer_email: orderData.customer_email,
+                customer_phone: orderData.customer_phone,
+                shipping_address: orderData.shipping_address,
+            })
+            .select()
+            .single();
+
+        if (orderError) {
+            console.error('Error creating order:', orderError);
+            return null;
+        }
+
+        // Create order items
+        const orderItems = orderData.items.map(item => ({
+            order_id: order.id,
+            product_id: item.product_id,
+            product_name: item.product_name,
+            product_price: item.product_price,
+            product_image: item.product_image,
+            size: item.size,
+            quantity: item.quantity,
+        }));
+
+        const { error: itemsError } = await supabase
+            .from('order_items')
+            .insert(orderItems);
+
+        if (itemsError) {
+            console.error('Error creating order items:', itemsError);
+            // Note: In a production app, you might want to rollback the order here
+            return null;
+        }
+
+        return order;
+    } catch (error) {
+        console.error('Error creating order:', error);
+        return null;
+    }
+}
+
+// Get orders for a user
+export async function getUserOrders(userId: string): Promise<Order[]> {
+    try {
+        const { data, error } = await supabase
+            .from('orders')
+            .select(`
+                *,
+                order_items (*)
+            `)
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error fetching user orders:', error);
+            return [];
+        }
+
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching user orders:', error);
+        return [];
+    }
+}
 
 export const navItems = [
     { name: 'Trang chủ', href: '/' },

@@ -6,6 +6,7 @@ import { Footer } from '../../components/Footer';
 import { ArrowLeft, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '../../contexts/CartContext';
+import { createOrder } from '../../lib/data';
 
 const CheckoutPage = () => {
     const { state, totalItems, totalPrice } = useCart();
@@ -22,17 +23,52 @@ const CheckoutPage = () => {
     }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
+        const { name, value, type } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'radio' ? value : value
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Checkout Data:', formData);
-        alert('Đặt hàng thành công! Thông tin đã được lưu vào console.');
+
+        if (state.items.length === 0) {
+            alert('Giỏ hàng trống!');
+            return;
+        }
+
+        try {
+            const orderData = {
+                total_amount: totalPrice,
+                customer_name: formData.name,
+                customer_email: '', // You might want to add email field to form
+                customer_phone: formData.phone,
+                shipping_address: formData.address,
+                items: state.items.map(item => ({
+                    product_id: item.id,
+                    product_name: item.name,
+                    product_price: item.price,
+                    product_image: item.image,
+                    size: item.size,
+                    quantity: item.quantity,
+                })),
+            };
+
+            const order = await createOrder(orderData);
+
+            if (order) {
+                alert('Đặt hàng thành công! Mã đơn hàng: ' + order.id);
+                // Clear cart after successful order
+                // You might want to add a clear cart function to CartContext
+                window.location.href = '/'; // Redirect to home page
+            } else {
+                alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
+            }
+        } catch (error) {
+            console.error('Error creating order:', error);
+            alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
+        }
     };
 
     return (

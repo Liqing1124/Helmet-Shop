@@ -4,7 +4,7 @@ import { Navigation } from '../../components/Navigation';
 import { Footer } from '../../components/Footer';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
-import { bestSellers } from '../../lib/data';
+import { getProducts, Product } from '../../lib/data';
 import { useCart } from '../../contexts/CartContext';
 import { useState, useEffect } from 'react';
 import ProductModal from '../../components/ProductModal';
@@ -12,20 +12,27 @@ import { ProductGridSkeleton } from '../../components/Skeleton';
 
 function ProductsSection() {
     const { dispatch } = useCart();
-    const [selectedProduct, setSelectedProduct] = useState<typeof bestSellers[0] | null>(null);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Simulate loading delay
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        const fetchProducts = async () => {
+            try {
+                const data = await getProducts();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-        return () => clearTimeout(timer);
+        fetchProducts();
     }, []);
 
-    const handleProductClick = (product: typeof bestSellers[0]) => {
+    const handleProductClick = (product: Product) => {
         setSelectedProduct(product);
         setIsModalOpen(true);
     };
@@ -34,8 +41,6 @@ function ProductsSection() {
         setIsModalOpen(false);
         setSelectedProduct(null);
     };
-
-
 
     return (
         <motion.section
@@ -57,7 +62,7 @@ function ProductsSection() {
                     <ProductGridSkeleton />
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {bestSellers.map((product, index) => (
+                        {products.map((product, index) => (
                             <motion.div
                                 id={`product-${product.id}`}
                                 key={product.id}

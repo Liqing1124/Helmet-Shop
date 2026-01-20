@@ -202,8 +202,6 @@ helmet-shop/
 ├── supabase-schema.sql     # Database schema SQL
 ├── supabase-setup.js       # Setup script helper
 ├── tsconfig.json           # TypeScript configuration
-├── database/
-│   └── helmet-shop.db      # Local SQLite database (optional)
 ├── public/                 # Static assets
 │   ├── bihelmet.jpg        # Brand image
 │   └── ...                 # Other static files
@@ -237,9 +235,7 @@ helmet-shop/
 │   └── lib/                 # Utilities & data
 │       ├── data.ts              # Supabase data fetching functions
 │       ├── supabase.ts          # Supabase client configuration
-│       └── utils.ts             # Utility functions
-└── database/                # Local database (optional)
-    └── helmet-shop.db       # SQLite database file
+│   └── utils.ts             # Utility functions
 ```
 
 ### 📋 Files quan trọng

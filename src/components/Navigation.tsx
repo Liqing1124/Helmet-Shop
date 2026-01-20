@@ -1,7 +1,7 @@
 'use client';
 
 import { Search, ShoppingCart } from 'lucide-react';
-import { navItems, bestSellers, Product } from '../lib/data';
+import { navItems, getBestSellers, Product } from '../lib/data';
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { CartDrawer } from './CartDrawer';
@@ -35,7 +35,7 @@ export function Navigation() {
         };
     }, []);
 
-    const handleSearch = (query: string) => {
+    const handleSearch = async (query: string) => {
         setSearchQuery(query);
         if (query.trim() === '') {
             setSearchResults([]);
@@ -43,6 +43,7 @@ export function Navigation() {
             return;
         }
 
+        const bestSellers = await getBestSellers();
         const filtered = bestSellers.filter(product =>
             product.name.toLowerCase().includes(query.toLowerCase()) ||
             product.description.toLowerCase().includes(query.toLowerCase())

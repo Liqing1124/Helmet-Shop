@@ -56,13 +56,30 @@ export async function getCategories(): Promise<Category[]> {
             .order('id');
 
         if (error) {
-            console.error('Error fetching categories:', error);
+            console.error('Error fetching categories from Supabase:', {
+                message: error.message || 'No error message',
+                code: error.code || 'No error code',
+                details: error.details || 'No details',
+                hint: error.hint || 'No hint',
+                fullError: error
+            });
             return [];
         }
 
         return data || [];
     } catch (error) {
-        console.error('Error fetching categories:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error fetching categories:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error fetching categories:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error fetching categories:', String(error));
+        }
         return [];
     }
 }
@@ -76,13 +93,30 @@ export async function getProducts(): Promise<Product[]> {
             .order('id');
 
         if (error) {
-            console.error('Error fetching products:', error);
+            console.error('Error fetching products from Supabase:', {
+                message: error.message || 'No error message',
+                code: error.code || 'No error code',
+                details: error.details || 'No details',
+                hint: error.hint || 'No hint',
+                fullError: error
+            });
             return [];
         }
 
         return data || [];
     } catch (error) {
-        console.error('Error fetching products:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error fetching products:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error fetching products:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error fetching products:', String(error));
+        }
         return [];
     }
 }
@@ -98,13 +132,30 @@ export async function getBestSellers(): Promise<Product[]> {
             .limit(4);
 
         if (error) {
-            console.error('Error fetching best sellers:', error);
+            console.error('Error fetching best sellers from Supabase:', {
+                message: error.message || 'No error message',
+                code: error.code || 'No error code',
+                details: error.details || 'No details',
+                hint: error.hint || 'No hint',
+                fullError: error
+            });
             return [];
         }
 
         return data || [];
     } catch (error) {
-        console.error('Error fetching best sellers:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error fetching best sellers:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error fetching best sellers:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error fetching best sellers:', String(error));
+        }
         return [];
     }
 }
@@ -118,13 +169,30 @@ export async function getTrustFactors(): Promise<TrustFactor[]> {
             .order('id');
 
         if (error) {
-            console.error('Error fetching trust factors:', error);
+            console.error('Error fetching trust factors from Supabase:', {
+                message: error.message || 'No error message',
+                code: error.code || 'No error code',
+                details: error.details || 'No details',
+                hint: error.hint || 'No hint',
+                fullError: error
+            });
             return [];
         }
 
         return data || [];
     } catch (error) {
-        console.error('Error fetching trust factors:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error fetching trust factors:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error fetching trust factors:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error fetching trust factors:', String(error));
+        }
         return [];
     }
 }
@@ -162,7 +230,13 @@ export async function createOrder(orderData: {
             .single();
 
         if (orderError) {
-            console.error('Error creating order:', orderError);
+            console.error('Error creating order from Supabase:', {
+                message: orderError.message || 'No error message',
+                code: orderError.code || 'No error code',
+                details: orderError.details || 'No details',
+                hint: orderError.hint || 'No hint',
+                fullError: orderError
+            });
             return null;
         }
 
@@ -182,14 +256,31 @@ export async function createOrder(orderData: {
             .insert(orderItems);
 
         if (itemsError) {
-            console.error('Error creating order items:', itemsError);
+            console.error('Error creating order items from Supabase:', {
+                message: itemsError.message || 'No error message',
+                code: itemsError.code || 'No error code',
+                details: itemsError.details || 'No details',
+                hint: itemsError.hint || 'No hint',
+                fullError: itemsError
+            });
             // Note: In a production app, you might want to rollback the order here
             return null;
         }
 
         return order;
     } catch (error) {
-        console.error('Error creating order:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error creating order:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error creating order:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error creating order:', String(error));
+        }
         return null;
     }
 }
@@ -207,13 +298,30 @@ export async function getUserOrders(userId: string): Promise<Order[]> {
             .order('created_at', { ascending: false });
 
         if (error) {
-            console.error('Error fetching user orders:', error);
+            console.error('Error fetching user orders from Supabase:', {
+                message: error.message || 'No error message',
+                code: error.code || 'No error code',
+                details: error.details || 'No details',
+                hint: error.hint || 'No hint',
+                fullError: error
+            });
             return [];
         }
 
         return data || [];
     } catch (error) {
-        console.error('Error fetching user orders:', error);
+        // Handle different types of errors
+        if (error instanceof Error) {
+            console.error('Error fetching user orders:', {
+                message: error.message,
+                stack: error.stack,
+                name: error.name
+            });
+        } else if (typeof error === 'object' && error !== null) {
+            console.error('Error fetching user orders:', JSON.stringify(error, null, 2));
+        } else {
+            console.error('Error fetching user orders:', String(error));
+        }
         return [];
     }
 }

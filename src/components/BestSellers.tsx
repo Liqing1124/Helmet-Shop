@@ -14,14 +14,17 @@ export function BestSellers() {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchBestSellers = async () => {
             try {
                 const data = await getBestSellers();
                 setProducts(data);
+                setError(null);
             } catch (error) {
                 console.error('Error fetching best sellers:', error);
+                setError('Unable to load best sellers. Please check your connection and try again.');
             } finally {
                 setIsLoading(false);
             }
@@ -60,6 +63,36 @@ export function BestSellers() {
                 </motion.h2>
                 {isLoading ? (
                     <ProductGridSkeleton />
+                ) : error ? (
+                    <div className="text-center py-8">
+                        <p className="text-red-500 dark:text-red-400 text-lg">{error}</p>
+                        <button
+                            onClick={() => {
+                                setIsLoading(true);
+                                setError(null);
+                                const fetchBestSellers = async () => {
+                                    try {
+                                        const data = await getBestSellers();
+                                        setProducts(data);
+                                        setError(null);
+                                    } catch (error) {
+                                        console.error('Error fetching best sellers:', error);
+                                        setError('Unable to load best sellers. Please check your connection and try again.');
+                                    } finally {
+                                        setIsLoading(false);
+                                    }
+                                };
+                                fetchBestSellers();
+                            }}
+                            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                        >
+                            Thử lại
+                        </button>
+                    </div>
+                ) : products.length === 0 ? (
+                    <div className="text-center py-8">
+                        <p className="text-gray-500 dark:text-gray-400 text-lg">Không có sản phẩm bán chạy nào.</p>
+                    </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {products.map((product, index) => (
